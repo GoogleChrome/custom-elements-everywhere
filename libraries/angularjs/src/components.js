@@ -81,6 +81,28 @@ const ComponentWithProps = {
   }
 };
 
+const ComponentWithoutProps = {
+  template: `
+    <div>
+      <ce-without-properties id="wc"
+        ng-attr-amethod="{{ $ctrl.method }}"
+        ng-attr-agetter="{{ $ctrl.getter }}"
+        ng-attr-areadonly="{{ $ctrl.readonly }}"
+      ></ce-without-properties>
+    </div>
+  `,
+  controller: class {
+    constructor() {}
+    $onInit() {
+      angular.extend(this, {
+        method: 'method',
+        getter: 'getter',
+        readonly: 'readonly'
+      })
+    }
+  }
+}
+
 const ComponentWithImperativeEvent = {
   template: `
     <div>
@@ -154,6 +176,7 @@ export {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProps,
+  ComponentWithoutProps,
   ComponentWithImperativeEvent,
   ComponentWithDeclarativeEvent
 }

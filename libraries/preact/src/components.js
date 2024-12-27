@@ -19,6 +19,7 @@ import { h, render, Component } from 'preact';
 import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
+import 'ce-without-properties';
 import 'ce-with-event';
 
 export class ComponentWithoutChildren extends Component {
@@ -106,6 +107,25 @@ export class ComponentWithProperties extends Component {
         ></ce-with-properties>
       </div>
     );
+  }
+}
+
+export class ComponentWithoutProperties extends Component {
+  render () {
+    const data = {
+      method: 'method',
+      getter: 'getter',
+      readonly: 'readonly'
+    }
+    return (
+      <div>
+        <ce-without-properties id="wc"
+          amethod={data.method}
+          agetter={data.getter}
+          areadonly={data.readonly}
+        ></ce-without-properties>
+      </div>
+    )
   }
 }
 

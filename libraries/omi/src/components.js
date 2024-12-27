@@ -3,6 +3,7 @@ import 'ce-without-children'
 import 'ce-with-children'
 import 'ce-with-properties'
 import 'ce-with-event'
+import 'ce-without-properties'
 
 define('component-without-children', _ => (
   <div>
@@ -76,6 +77,23 @@ define('component-with-properties', _ => {
     </div>
   );
 
+})
+
+define('component-without-properties', _ => {
+  const data = {
+    method: 'method',
+    getter: 'getter',
+    readonly: 'readonly'
+  }
+  return (
+    <div>
+      <ce-without-properties id="wc"
+        amethod={data.method}
+        agetter={data.getter}
+        areadonly={data.readonly}
+      ></ce-without-properties>
+    </div>
+  )
 })
 
 

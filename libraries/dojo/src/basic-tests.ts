@@ -22,7 +22,8 @@ import {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProperties,
-  ComponentWithImperativeEvent
+  ComponentWithImperativeEvent,
+  ComponentWithoutProperties
 } from "./components";
 
 import renderer, { w } from "@dojo/framework/core/vdom";
@@ -127,6 +128,16 @@ describe("basic support", function() {
       const wc: any = document.querySelector("ce-with-properties");
       const data = wc.getAttribute("str");
       expect(data).to.eql("Dojo");
+    });
+
+    it('will not overwrite unwriteable properties', function () {
+      const r = renderer(() => w(ComponentWithoutProperties, {}));
+      r.mount({ domNode: scratch, sync: true });
+      const wc: any = document.querySelector("ce-without-properties");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
   });
 

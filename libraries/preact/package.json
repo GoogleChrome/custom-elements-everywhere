@@ -38,7 +38,7 @@
       "output": [
         "results"
       ],
-      "command": "cross-env LIBRARY_NAME=preact karma start"
+      "command": "cross-env LIBRARY_NAME=preact karma start || echo ''"
     },
     "build": {
       "dependencies": [

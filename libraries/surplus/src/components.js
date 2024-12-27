@@ -21,6 +21,7 @@ import on from 'surplus-mixin-on';
 import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
+import 'ce-without-properties';
 import 'ce-with-event';
 
 export const ComponentWithoutChildren = () =>
@@ -78,6 +79,23 @@ export const ComponentWithProperties = () => {
         ></ce-with-properties>
       </div>
     );
+}
+
+export const ComponentWithoutProperties = () => {
+  const data = {
+    getter: 'getter',
+    method: 'method',
+    readonly: 'readonly',
+  };
+  return (
+    <div>
+      <ce-without-properties ref={__.wc}
+         amethod={data.method}
+         agetter={data.getter}
+         areadonly={data.readonly}
+      ></ce-without-properties>
+    </div>
+  )
 }
 
 export const ComponentWithUnregistered = () => {

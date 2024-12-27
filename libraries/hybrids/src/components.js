@@ -19,6 +19,7 @@ import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
 import 'ce-with-event';
+import 'ce-without-properties';
 
 import { html } from 'hybrids';
 
@@ -61,6 +62,17 @@ export const ComponentWithProperties = {
     ></ce-with-properties>
   `,
 };
+
+export const ComponentWithoutProperties = {
+  render: () => html`
+    <ce-without-properties
+      id="wc"
+      amethod="method"
+      agetter="getter"
+      areadonly="readonly"
+    ></ce-without-properties>
+  `
+}
 
 export const ComponentWithDeclarativeEvent = {
   lowercaseHandled: false,

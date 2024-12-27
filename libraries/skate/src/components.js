@@ -23,6 +23,7 @@ import { h } from "preact";
 import "ce-without-children";
 import "ce-with-children";
 import "ce-with-properties";
+import "ce-without-properties";
 import "ce-with-event";
 
 export class ComponentWithoutChildren extends withComponent(withPreact()) {
@@ -127,6 +128,27 @@ export class ComponentWithProperties extends withComponent(withPreact()) {
   }
 }
 customElements.define("component-with-properties", ComponentWithProperties);
+
+export class ComponentWithoutProperties extends withComponent(withPreact()) {
+  render() {
+    const data = {
+      getter: 'getter',
+      readonly: 'readonly',
+      method: 'method',
+    }
+    return (
+      <div>
+        <ce-without-properties
+          id="wc"
+          agetter={data.getter}
+          areadonly={data.readonly}
+          amethod={data.method}
+        ></ce-without-properties>
+      </div>
+    )
+  }
+}
+customElements.define("component-without-properties", ComponentWithoutProperties)
 
 export class ComponentWithUnregistered extends withComponent(withPreact()) {
   render() {

@@ -21,6 +21,7 @@ import {
   createComponentWithChildrenRerender,
   createComponentWithDifferentViews,
   createComponentWithProperties,
+  createComponentWithoutProperties,
   createComponentWithImperativeEvent,
 } from './components';
 
@@ -134,6 +135,17 @@ describe('basic support', function() {
       const wc = cmp.shadowRoot.querySelector('ce-with-properties');
       const data = wc.str || wc.getAttribute('str');
       expect(data).to.eql('lwc');
+    });
+
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      const cmp = createComponentWithoutProperties();
+      scratch.appendChild(cmp);
+      const wc = cmp.shadowRoot.querySelector('ce-without-properties');
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
   });
 

@@ -26,6 +26,7 @@ import {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProperties,
+  ComponentWithoutProperties,
   ComponentWithImperativeEvent,
   ComponentWithDeclarativeEvent
 } from "./components";
@@ -130,6 +131,16 @@ describe("basic support", function() {
       let wc = root.querySelector("#wc");
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("hyperHTML");
+    });
+
+    it('will not overwrite unwriteable properties', function () {
+      this.weight = 3;
+      ComponentWithoutProperties(root);
+      let wc = root.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
   });
 

@@ -20,6 +20,7 @@ import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
 import 'ce-with-event';
+import 'ce-without-properties';
 
 export class ComponentWithoutChildren extends Component {
   render() {
@@ -106,6 +107,16 @@ export class ComponentWithProperties extends Component {
         ></ce-with-properties>
       </div>
     );
+  }
+}
+
+export class ComponentWithoutProperties extends Component {
+  render () {
+    return (
+      <div>
+        <ce-without-properties id="wc" amethod="method" agetter="getter" areadonly="readonly" />
+      </div>
+    )
   }
 }
 

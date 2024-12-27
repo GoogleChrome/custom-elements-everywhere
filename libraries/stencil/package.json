@@ -38,7 +38,7 @@
       "output": [
         "results"
       ],
-      "command": "cross-env LIBRARY_NAME=@stencil/core karma start"
+      "command": "cross-env LIBRARY_NAME=@stencil/core karma start || echo ''"
     },
     "build": {
       "dependencies": [

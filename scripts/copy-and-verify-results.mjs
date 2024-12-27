@@ -67,7 +67,7 @@ function compareResultsAgainstGoldens(library) {
   }
   // A constant, to make sure that if we add/remove any tests, that we add that test to all
   // tested libraries.
-  const numberOfTests = 32;
+  const numberOfTests = 34;
   chai.assert.equal(actual.success + actual.failed, numberOfTests, `${library.name} has incorrect total tests`);
   chai.assert.deepEqual(actual, expected, `${library.name} has incorrect deep results equal`);
 }

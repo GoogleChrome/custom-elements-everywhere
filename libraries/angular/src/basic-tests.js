@@ -27,7 +27,8 @@ import {
   ComponentWithProperties,
   ComponentWithUnregistered,
   ComponentWithImperativeEvent,
-  ComponentWithDeclarativeEvent
+  ComponentWithDeclarativeEvent,
+  ComponentWithoutProperties
 } from "./components";
 
 beforeEach(function() {
@@ -40,7 +41,8 @@ beforeEach(function() {
       ComponentWithProperties,
       ComponentWithUnregistered,
       ComponentWithImperativeEvent,
-      ComponentWithDeclarativeEvent
+      ComponentWithDeclarativeEvent,
+      ComponentWithoutProperties
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
   });
@@ -145,6 +147,17 @@ describe("basic support", function() {
       let wc = root.querySelector("#wc");
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("Angular");
+    });
+
+    it('will not overwrite unwriteable properties', function () {
+      let fixture = TestBed.createComponent(ComponentWithoutProperties);
+      fixture.detectChanges();
+      let root = fixture.debugElement.nativeElement;
+      let wc = root.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
   });
 

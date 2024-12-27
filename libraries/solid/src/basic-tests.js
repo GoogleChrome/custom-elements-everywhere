@@ -23,6 +23,7 @@ import {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProperties,
+  ComponentWithoutProperties,
   ComponentWithUnregistered,
   ComponentWithImperativeEvent,
   ComponentWithDeclarativeEvent
@@ -108,6 +109,16 @@ describe("basic support", function() {
       render(() => wc = <ComponentWithProperties />, document.body);
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("Solid");
+    });
+
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      let wc;
+      render(() => wc = <ComponentWithoutProperties />, document.body);
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
 
     // TODO: Is it the framework's responsibility to check if the underlying

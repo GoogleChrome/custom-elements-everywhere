@@ -20,6 +20,7 @@ import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
 import 'ce-with-event';
+import 'ce-without-properties';
 
 export class ComponentWithoutChildren extends Component {
   render() {
@@ -109,6 +110,12 @@ export class ComponentWithProperties extends Component {
     );
   }
 }
+
+export const ComponentWithoutProperties = React.forwardRef(({}, ref) => {
+  return <div>
+    <ce-without-properties amethod="method" agetter="getter" areadonly="readonly" ref={ref}></ce-without-properties>
+  </div>
+});
 
 export class ComponentWithUnregistered extends Component {
   render () {

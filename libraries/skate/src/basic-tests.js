@@ -138,6 +138,20 @@ describe("basic support", function() {
     });
   });
 
+  describe("without properties", function() {
+    it("will not overwrite unwriteable properties", async function() {
+      this.weight = 3;
+      let root = document.createElement('component-without-properties');
+      scratch.appendChild(root);
+      await Promise.resolve();
+      let wc = root.shadowRoot.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
+    });
+  })
+
   describe("events", function() {
     it("can imperatively listen to a DOM event dispatched by a Custom Element", async function() {
       this.weight = 3;

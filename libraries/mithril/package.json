@@ -34,7 +34,7 @@
       "output": [
         "results"
       ],
-      "command": "cross-env LIBRARY_NAME=mithril karma start"
+      "command": "cross-env LIBRARY_NAME=mithril karma start || echo ''"
     },
     "build": {
       "dependencies": [

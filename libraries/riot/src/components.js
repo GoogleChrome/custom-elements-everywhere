@@ -18,6 +18,7 @@
 import 'ce-without-children'
 import 'ce-with-children'
 import 'ce-with-properties'
+import 'ce-without-properties'
 import 'ce-with-event'
 
 export { default as ComponentWithoutChildren } from './components/ComponentWithoutChildren.riot'
@@ -25,6 +26,7 @@ export { default as ComponentWithChildren } from './components/ComponentWithChil
 export { default as ComponentWithChildrenRerender } from './components/ComponentWithChildrenRerender.riot'
 export { default as ComponentWithDifferentViews } from './components/ComponentWithDifferentViews.riot'
 export { default as ComponentWithProperties } from './components/ComponentWithProperties.riot'
+export { default as ComponentWithoutProperties } from './components/ComponentWithoutProperties.riot'
 export { default as ComponentWithUnregistered } from './components/ComponentWithUnregistered.riot'
 export { default as ComponentWithImperativeEvent } from './components/ComponentWithImperativeEvent.riot'
 export { default as ComponentWithDeclarativeEvent } from './components/ComponentWithDeclarativeEvent.riot'

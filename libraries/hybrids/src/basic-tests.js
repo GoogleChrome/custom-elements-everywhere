@@ -25,6 +25,7 @@ import {
   ComponentWithDifferentViews,
   ComponentWithProperties,
   ComponentWithDeclarativeEvent,
+  ComponentWithoutProperties,
 } from "./components";
 
 describe("basic support", function() {
@@ -162,6 +163,25 @@ describe("basic support", function() {
         expect(data).to.eql("hybrids");
         done();
       });
+    });
+  });
+
+  describe('without properties', function () {
+    define("component-without-properties", ComponentWithoutProperties);
+
+    beforeEach(() => {
+      root.appendChild(document.createElement("component-without-properties"));
+    });
+
+    it('will not overwrite unwriteable properties', function () {
+      this.weight = 3;
+      requestAnimationFrame(() => {
+        const wc = root.firstElementChild.shadowRoot.querySelector('#wc');
+        expect(wc.getAttribute('amethod')).to.eql('method');
+        expect(wc.getAttribute('agetter')).to.eql('getter');
+        expect(wc.getAttribute('areadonly')).to.eql('readonly');
+        expect(wc.innerHTML).to.eql('Success');
+      })
     });
   });
 

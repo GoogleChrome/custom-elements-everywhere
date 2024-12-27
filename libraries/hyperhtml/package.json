@@ -35,7 +35,7 @@
       "output": [
         "results"
       ],
-      "command": "cross-env LIBRARY_NAME=hyperhtml karma start"
+      "command": "cross-env LIBRARY_NAME=hyperhtml karma start || echo ''"
     },
     "build": {
       "dependencies": [

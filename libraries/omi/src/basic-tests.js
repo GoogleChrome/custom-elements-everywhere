@@ -102,6 +102,16 @@ describe("basic support", function () {
       expect(data).to.eql("Omi");
     });
 
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      let root = render(<component-without-properties />, scratch);
+      let wc = root.shadowRoot.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
+    });
+
     // it('will set boolean attributes on a Custom Element that has not already been defined and upgraded', function () {
     //   let root = render(<component-with-unregistered />, scratch);
     //   let wc = root.shadowRoot.querySelector('#wc');

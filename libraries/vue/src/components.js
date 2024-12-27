@@ -20,6 +20,7 @@ import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
 import 'ce-with-event';
+import 'ce-without-properties';
 
 export const ComponentWithoutChildren = defineComponent({
   template: `
@@ -99,6 +100,25 @@ export const ComponentWithProperties = defineComponent({
     }
   }
 });
+
+export const ComponentWithoutProperties = defineComponent({
+  template: `
+    <div>
+      <ce-without-properties id="wc"
+        :amethod.attr="method"
+        :agetter.attr="getter"
+        :areadonly.attr="readonly"
+      ></ce-without-properties>
+    </div>
+  `,
+  data: function () {
+    return {
+      method: 'method',
+      getter: 'getter',
+      readonly: 'readonly',
+    }
+  }
+})
 
 export const ComponentWithUnregistered = defineComponent({
   template: `

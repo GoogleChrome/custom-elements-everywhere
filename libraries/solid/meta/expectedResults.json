@@ -1,5 +1,5 @@
 {
-  "success": 32,
+  "success": 34,
   "failed": 0,
   "skipped": 0,
   "error": false,
@@ -7,9 +7,9 @@
   "exitCode": 0,
   "score": 100,
   "basicSupport": {
-    "total": 16,
+    "total": 18,
     "failed": 0,
-    "passed": 16
+    "passed": 18
   },
   "advancedSupport": {
     "total": 16,

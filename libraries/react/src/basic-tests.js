@@ -29,6 +29,7 @@ import {
   ComponentWithUnregistered,
   ComponentWithImperativeEvent,
   ComponentWithDeclarativeEvent,
+  ComponentWithoutProperties,
 } from "./components";
 
 // Setup the test harness. This will get cleaned out with every test.
@@ -196,6 +197,21 @@ describe("basic support", function () {
       let wc = root.wc;
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("React");
+    });
+
+    it('will not overwrite unwriteable properties', function () {
+      let wc;
+      render(
+        <ComponentWithoutProperties
+          ref={(current) => {
+            wc = current;
+          }}
+        />
+      )
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
 
     // TODO: Is it the framework's responsibility to check if the underlying

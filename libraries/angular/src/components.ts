@@ -27,6 +27,7 @@ import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
 import 'ce-with-event';
+import 'ce-without-properties';
 
 @Component({
   template: `
@@ -104,6 +105,15 @@ export class ComponentWithProperties {
     camelCaseObj: { label: "passed" }
   }
 }
+
+@Component({
+  template: `
+    <div>
+      <ce-without-properties amethod="method" agetter="getter" areadonly="readonly" id="wc"></ce-without-properties>
+    </div>
+  `
+})
+export class ComponentWithoutProperties {}
 
 @Component({
   template: `

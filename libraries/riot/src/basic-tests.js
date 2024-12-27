@@ -23,6 +23,7 @@ import {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProperties,
+  ComponentWithoutProperties,
   ComponentWithUnregistered,
   ComponentWithImperativeEvent
 } from './components'
@@ -121,6 +122,16 @@ describe('basic support', function() {
       let data = wc.str || wc.getAttribute('str')
       expect(data).to.eql('riot')
     })
+
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      component(ComponentWithoutProperties)(scratch)
+      let wc = scratch.querySelector('#wc')
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
+    });
 
     // Riot.js passes all the following tests but they must be commented out
     // being consistent with the other frameworks ¯\_(ツ)_/¯

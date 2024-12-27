@@ -21,6 +21,7 @@ import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
 import 'ce-with-event';
+import 'ce-without-properties';
 
 const factory = create({ icache });
 
@@ -66,6 +67,15 @@ export const ComponentWithProperties = factory(() => {
   };
   return v('ce-with-properties', data);
 });
+
+export const ComponentWithoutProperties = factory(() => {
+  const data = {
+    amethod: 'method',
+    agetter: 'getter',
+    areadonly: 'readonly'
+  };
+  return v('ce-without-properties', data);
+})
 
 export const ComponentWithUnregistered = factory(() => {
   const data = {

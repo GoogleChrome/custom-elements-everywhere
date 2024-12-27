@@ -18,6 +18,7 @@
 import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
+import 'ce-without-properties';
 import 'ce-with-event';
 
 import { createElement } from 'lwc';
@@ -27,6 +28,7 @@ import WithChildren from 'x/withChildren';
 import WithChildrenRerender from 'x/withChildrenRerender';
 import WithDifferentViews from 'x/withDifferentViews';
 import WithProperties from 'x/withProperties';
+import WithoutProperties from 'x/withoutProperties';
 import WithImperativeEvent from 'x/withImperativeEvent';
 import WithDeclarativeEvent from 'x/withDeclarativeEvent';
 
@@ -48,6 +50,10 @@ export function createComponentWithDifferentViews() {
 
 export function createComponentWithProperties() {
   return createElement('x-with-properties', { is: WithProperties });
+}
+
+export function createComponentWithoutProperties() {
+  return createElement('x-without-properties', { is: WithoutProperties });
 }
 
 export function createComponentWithImperativeEvent() {

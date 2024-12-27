@@ -25,7 +25,8 @@ import {
   ComponentWithProperties,
   ComponentWithUnregistered,
   ComponentWithImperativeEvent,
-  ComponentWithDeclarativeEvent
+  ComponentWithDeclarativeEvent,
+  ComponentWithoutProperties
 } from "./components";
 
 // Setup the test harness. This will get cleaned out with every test.
@@ -128,6 +129,16 @@ describe("basic support", function() {
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("DIO");
     });
+
+    it('will not overwrite unwriteable properties', function () {
+      render(<ComponentWithoutProperties />, scratch);
+      console.log(scratch);
+      let wc = scratch.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
+    })
   });
 
   describe("events", function() {

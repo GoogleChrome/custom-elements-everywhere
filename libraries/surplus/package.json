@@ -37,7 +37,7 @@
       "output": [
         "results"
       ],
-      "command": "cross-env LIBRARY_NAME=surplus karma start"
+      "command": "cross-env LIBRARY_NAME=surplus karma start || echo ''"
     },
     "build": {
       "dependencies": [

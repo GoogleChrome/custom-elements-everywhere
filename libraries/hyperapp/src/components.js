@@ -19,6 +19,7 @@ import "ce-without-children"
 import "ce-with-children"
 import "ce-with-properties"
 import "ce-with-event"
+import "ce-without-properties"
 
 import { app, h, text } from "hyperapp"
 
@@ -77,6 +78,20 @@ export const ComponentWithProperties = node =>
           arr: ["H", "y", "p", "e", "r", "a", "p", "p"],
           obj: { org: "Hyperapp", repo: "hyperapp.js" },
           camelCaseObj: { label: "passed" },
+        }),
+      ]),
+  })
+
+export const ComponentWithoutProperties = node =>
+  app({
+    node,
+    init: {},
+    view: () =>
+      h('div', {}, [
+        h('ce-without-properties', {
+          amethod: 'method',
+          agetter: 'getter',
+          areadonly: 'readonly'
         }),
       ]),
   })

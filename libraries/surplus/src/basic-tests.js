@@ -24,6 +24,7 @@ import {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProperties,
+  ComponentWithoutProperties,
   ComponentWithUnregistered,
   ComponentWithImperativeEvent,
   ComponentWithDeclarativeEvent
@@ -120,6 +121,18 @@ describe("basic support", function() {
         let data = wc.str || wc.getAttribute("str");
         expect(data).to.eql("Surplus");
       });
+    });
+
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      S.root(() => {
+        let root = <ComponentWithoutProperties />;
+        let wc = root.wc;
+        expect(wc.getAttribute('amethod')).to.eql('method');
+        expect(wc.getAttribute('agetter')).to.eql('getter');
+        expect(wc.getAttribute('areadonly')).to.eql('readonly');
+        expect(wc.innerHTML).to.eql('Success');
+      })
     });
 
     // TODO: Is it the framework's responsibility to check if the underlying

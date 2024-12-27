@@ -113,6 +113,19 @@ describe("basic support", () => {
     });
   });
 
+  describe("without properties", () => {
+    it('will not overwrite unwriteable properties', function () {
+      this.weight = 3;
+      const comp = compile("<comp-without-props>")(scope);
+      scope.$digest();
+      const wc = comp[0].querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
+    });
+  });
+
   describe("events", () => {
     it("can imperatively listen to a DOM event dispatched by a Custom Element", function() {
       this.weight = 3;

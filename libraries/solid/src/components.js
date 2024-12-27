@@ -20,6 +20,7 @@ import { createStore } from "solid-js/store";
 import "ce-without-children";
 import "ce-with-children";
 import "ce-with-properties";
+import "ce-without-properties";
 import "ce-with-event";
 
 export const ComponentWithoutChildren = () => <ce-without-children />;
@@ -62,6 +63,21 @@ export const ComponentWithProperties = () => {
     />
   );
 };
+
+export const ComponentWithoutProperties = () => {
+  const data = {
+    getter: 'getter',
+    method: 'method',
+    readonly: 'readonly',
+  }
+  return (
+    <ce-without-properties
+      attr:agetter={data.getter}
+      attr:amethod={data.method}
+      attr:areadonly={data.readonly}
+    />
+  )
+}
 
 export const ComponentWithUnregistered = () => {
   const data = {

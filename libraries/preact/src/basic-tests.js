@@ -23,6 +23,7 @@ import {
   ComponentWithChildrenRerender,
   ComponentWithDifferentViews,
   ComponentWithProperties,
+  ComponentWithoutProperties,
   ComponentWithUnregistered,
   ComponentWithImperativeEvent,
   ComponentWithDeclarativeEvent
@@ -112,6 +113,17 @@ describe("basic support", function() {
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("Preact");
     });
+
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      let root = mount(<ComponentWithoutProperties />).getDOMNode();
+      let wc = root.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
+    });
+
 
     // it('will set boolean attributes on a Custom Element that has not already been defined and upgraded', function() {
     //   let root = mount(<ComponentWithUnregistered />).getDOMNode();

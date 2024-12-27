@@ -27,6 +27,7 @@ import {
   ComponentWithDifferentViews,
   ComponentWithProperties,
   ComponentWithImperativeEvent,
+  ComponentWithoutProperties,
   ComponentWithDeclarativeEvent
 } from "./components";
 
@@ -126,6 +127,16 @@ describe("basic support", function() {
       let wc = root.querySelector("#wc");
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("Mithril");
+    });
+
+    it("will not overwrite unwriteable properties", function () {
+      this.weight = 3;
+      m.mount(root, ComponentWithoutProperties());
+      let wc = root.querySelector("#wc");
+      expect(wc.getAttribute('amethod')).to.eql('method');
+      expect(wc.getAttribute('agetter')).to.eql('getter');
+      expect(wc.getAttribute('areadonly')).to.eql('readonly');
+      expect(wc.innerHTML).to.eql('Success');
     });
   });
 

@@ -19,6 +19,7 @@ import 'ce-without-children'
 import 'ce-with-children'
 import 'ce-with-properties'
 import 'ce-with-event'
+import 'ce-without-properties'
 
 import m from 'mithril'
 
@@ -82,6 +83,17 @@ export const ComponentWithProperties = () => ({
         arr: ['M', 'i', 't', 'h', 'r', 'i', 'l'],
         obj: { org: 'MithrilJS', repo: 'mithril.js' },
         camelCaseObj: { label: "passed" },
+      })
+    )
+})
+
+export const ComponentWithoutProperties = () => ({
+  view: () =>
+    m('div',
+      m('ce-without-properties#wc', {
+        amethod: 'method',
+        agetter: 'getter',
+        areadonly: 'readonly'
       })
     )
 })

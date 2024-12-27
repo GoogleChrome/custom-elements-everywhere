@@ -18,6 +18,7 @@
 import 'ce-without-children';
 import 'ce-with-children';
 import 'ce-with-properties';
+import 'ce-without-properties';
 import 'ce-with-event';
 
 import HyperHTMLELement from 'hyperhtml-element/esm';
@@ -78,6 +79,16 @@ export const ComponentWithProperties = (root) => hyper(root)`
       camelCaseObj=${{ label: "passed" }}
     ></ce-with-properties>
   </div>`;
+
+export const ComponentWithoutProperties = (root) => hyper(root)`
+  <div>
+    <ce-without-properties id="wc"
+      amethod="${"method"}"
+      agetter="${"getter"}"
+      areadonly="${"readonly"}"
+    ></ce-without-properties>
+  </div>
+`
 
 export class ComponentWithImperativeEvent extends HyperHTMLELement {
   created() {
