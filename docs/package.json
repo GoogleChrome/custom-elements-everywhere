@@ -11,7 +11,7 @@
   "author": "Rob Dodson",
   "license": "MIT",
   "devDependencies": {
-    "clean-css-cli": "5.6.2",
+    "clean-css": "^5.3.3",
     "handlebars": "4.7.8",
     "marked": "9.1.3"
   },
@@ -26,12 +26,13 @@
     "build-css": {
       "files": [
         "styles/third_party/bulma.css",
-        "styles/site.css"
+        "styles/site.css",
+        "scripts/build-css.js"
       ],
       "commentedOut-output": [
         "../out/styles/bundle.css"
       ],
-      "command": "mkdir -p ../out/styles; cat ./styles/third_party/bulma.css ./styles/site.css | cleancss -o ../out/styles/bundle.css"
+      "command": "node ./scripts/build-css.js"
     },
     "build-html": {
       "dependencies": [
@@ -40,13 +41,13 @@
       "files": [
         "libraries",
         "index.handlebars",
-        "index.js",
+        "scripts/build-html.js",
         "partials"
       ],
       "commentedOut-output": [
         "../out/index.html"
       ],
-      "command": "mkdir -p ../out; node index.js > ../out/index.html"
+      "command": "node ./scripts/build-html.js"
     },
     "copy": {
       "dependencies": [
@@ -57,7 +58,8 @@
         "CNAME",
         "robots.txt",
         "images",
-        "libraries"
+        "libraries",
+        "scripts/copy.js"
       ],
       "commentedOut-output": [
         "../out/404.html",
@@ -66,7 +68,7 @@
         "../out/images",
         "../out/libraries"
       ],
-      "command": "cp 404.html CNAME robots.txt ../out && cp -r images ../out && cp -r libraries ../out"
+      "command": "node ./scripts/copy.js"
     }
   }
 }
