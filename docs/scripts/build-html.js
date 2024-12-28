@@ -51,7 +51,7 @@ const libraries = Object.keys(libraryMap);
 
 hbs.registerPartial(
   "octocat",
-  fs.readFileSync(path.join(__dirname, "/partials/octocat.handlebars"), "utf8")
+  fs.readFileSync(path.join(__dirname, "..", "partials", "octocat.handlebars"), "utf8")
 );
 
 // Helper to color progress bar based on test scores
@@ -66,7 +66,7 @@ hbs.registerHelper("warning-level", function (score) {
   }
 });
 
-const tmpl = fs.readFileSync(path.join(__dirname, "index.handlebars"), "utf8");
+const tmpl = fs.readFileSync(path.join(__dirname, "..","index.handlebars"), "utf8");
 const render = hbs.compile(tmpl);
 const out = render({ libraries: buildContext(libraries) });
 
@@ -74,6 +74,7 @@ function buildContext(libraries) {
   return libraries.map(library => {
     const repo = require(path.resolve(
       __dirname,
+      "..",
       "libraries",
       library,
       "results/repo.json"
@@ -97,6 +98,7 @@ function buildContext(libraries) {
 function getTestResults(library) {
   const json = require(path.resolve(
     __dirname,
+    "..",
     "libraries",
     library,
     "results/results.json"
@@ -111,6 +113,7 @@ function getTestResults(library) {
 function getIssues(library) {
   return require(path.resolve(
     __dirname,
+    "..",
     "libraries",
     library,
     "meta/issues.json"
@@ -120,7 +123,7 @@ function getIssues(library) {
 // Collect markdown summary of library, process markdown, and return as string.
 function getSummary(library) {
   const md = fs.readFileSync(
-    path.resolve(__dirname, "libraries", library, "meta/summary.md"),
+    path.resolve(__dirname, "..", "libraries", library, "meta/summary.md"),
     "utf8"
   );
   const content = marked.parse(md);
@@ -128,5 +131,5 @@ function getSummary(library) {
   return { content };
 }
 
-// npm build script writes this output to index.html
-console.log(out);
+fs.mkdirSync(path.resolve(__dirname, '../../out'), {recursive: true});
+fs.writeFileSync(path.resolve(__dirname, '../../out/index.html'), out);
