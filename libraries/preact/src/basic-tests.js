@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { mount } from 'enzyme';
-import { h } from "preact";
+
+import { render, act } from '@testing-library/preact';
+import { h, createRef } from "preact";
 import { expect } from "chai";
 import {
   ComponentWithoutChildren,
@@ -33,7 +34,7 @@ describe("basic support", function() {
   describe("no children", function() {
     it("can display a Custom Element with no children", function() {
       this.weight = 3;
-      let root = mount(<ComponentWithoutChildren />).getDOMNode();
+      let root = render(<ComponentWithoutChildren />).baseElement;
       let wc = root.querySelector("#wc");
       expect(wc).to.exist;
     });
@@ -53,36 +54,37 @@ describe("basic support", function() {
 
     it("can display a Custom Element with children in a Shadow Root", function() {
       this.weight = 3;
-      let root = mount(<ComponentWithChildren />).getDOMNode();
+      let root = render(<ComponentWithChildren />).baseElement;
       let wc = root.querySelector("#wc");
       expectHasChildren(wc);
     });
 
     it("can display a Custom Element with children in a Shadow Root and pass in Light DOM children", async function() {
       this.weight = 3;
-      let wrapper = mount(<ComponentWithChildrenRerender />);
-      let root = wrapper.getDOMNode();
+      let root = render(<ComponentWithChildrenRerender />).baseElement;
       let wc = root.querySelector("#wc");
-      await Promise.resolve();
-      wrapper.update();
+      await act(async() => {
+        await Promise.resolve();
+      });
       expectHasChildren(wc);
       expect(wc.textContent.includes("2")).to.be.true;
     });
 
-    it("can display a Custom Element with children in the Shadow DOM and handle hiding and showing the element", function() {
+    it("can display a Custom Element with children in the Shadow DOM and handle hiding and showing the element", async function() {
       this.weight = 3;
-      let wrapper = mount(<ComponentWithDifferentViews />);
-      let root = wrapper.getDOMNode();
-      let component = wrapper.instance();
+      let component = createRef();
+      let root = render(<ComponentWithDifferentViews ref={component} />).baseElement;
       let wc = root.querySelector("#wc");
       expectHasChildren(wc);
-      component.toggle();
-      wrapper.update();
+      await act(() => {
+        component.current.toggle();
+      });
       let dummy = root.querySelector("#dummy");
       expect(dummy).to.exist;
       expect(dummy.textContent).to.eql("Dummy view");
-      component.toggle();
-      wrapper.update();
+      await act(() => {
+        component.current.toggle();
+      });
       wc = root.querySelector("#wc");
       expectHasChildren(wc);
     });
@@ -91,7 +93,7 @@ describe("basic support", function() {
   describe("attributes and properties", function() {
     it("will pass boolean data as either an attribute or a property", function() {
       this.weight = 3;
-      let root = mount(<ComponentWithProperties />).getDOMNode();
+      let root = render(<ComponentWithProperties />).baseElement;
       let wc = root.querySelector("#wc");
       let data = wc.bool || wc.hasAttribute("bool");
       expect(data).to.be.true;
@@ -99,7 +101,7 @@ describe("basic support", function() {
 
     it("will pass numeric data as either an attribute or a property", function() {
       this.weight = 3;
-      let root = mount(<ComponentWithProperties />).getDOMNode();
+      let root = render(<ComponentWithProperties />).baseElement;
       let wc = root.querySelector("#wc");
       let data = wc.num || wc.getAttribute("num");
       expect(parseInt(data, 10)).to.eql(42);
@@ -107,26 +109,26 @@ describe("basic support", function() {
 
     it("will pass string data as either an attribute or a property", function() {
       this.weight = 3;
-      let root = mount(<ComponentWithProperties />).getDOMNode();
+      let root = render(<ComponentWithProperties />).baseElement;
       let wc = root.querySelector("#wc");
       let data = wc.str || wc.getAttribute("str");
       expect(data).to.eql("Preact");
     });
 
     // it('will set boolean attributes on a Custom Element that has not already been defined and upgraded', function() {
-    //   let root = mount(<ComponentWithUnregistered />).getDOMNode();
+    //   let root = render(<ComponentWithUnregistered />).baseElement;
     //   let wc = root.querySelector('#wc');
     //   expect(wc.hasAttribute('bool')).to.be.true;
     // });
 
     // it('will set numeric attributes on a Custom Element that has not already been defined and upgraded', function() {
-    //   let root = mount(<ComponentWithUnregistered />).getDOMNode();
+    //   let root = render(<ComponentWithUnregistered />).baseElement;
     //   let wc = root.querySelector('#wc');
     //   expect(wc.getAttribute('num')).to.eql('42');
     // });
 
     // it('will set string attributes on a Custom Element that has not already been defined and upgraded', function() {
-    //   let root = mount(<ComponentWithUnregistered />).getDOMNode();
+    //   let root = render(<ComponentWithUnregistered />).baseElement;
     //   let wc = root.querySelector('#wc');
     //   expect(wc.getAttribute('str')).to.eql('Preact');
     // });
@@ -135,29 +137,29 @@ describe("basic support", function() {
     // // https://github.com/developit/preact/issues/678
     // // https://github.com/developit/preact/pull/511
     // it('will set array properties on a Custom Element that has not already been defined and upgraded', function() {
-    //   let root = mount(<ComponentWithUnregistered />).getDOMNode();
+    //   let root = render(<ComponentWithUnregistered />).baseElement;
     //   let wc = root.querySelector('#wc');
     //   expect(wc.arr).to.eql(['P', 'r', 'e', 'a', 'c', 't']);
     // });
 
     // it('will set object properties on a Custom Element that has not already been defined and upgraded', function() {
-    //   let root = mount(<ComponentWithUnregistered />).getDOMNode();
+    //   let root = render(<ComponentWithUnregistered />).baseElement;
     //   let wc = root.querySelector('#wc');
     //   expect(wc.obj).to.eql({ org: 'developit', repo: 'preact' });
     // });
   });
 
   describe("events", function() {
-    it("can imperatively listen to a DOM event dispatched by a Custom Element", function() {
+    it("can imperatively listen to a DOM event dispatched by a Custom Element", async function() {
       this.weight = 3;
-      let wrapper = mount(<ComponentWithImperativeEvent />);
-      let root = wrapper.getDOMNode();
+      let root = render(<ComponentWithImperativeEvent />).baseElement;
       let wc = root.querySelector("#wc");
       expect(wc).to.exist;
       let handled = root.querySelector("#handled");
       expect(handled.textContent).to.eql("false");
-      wc.click();
-      wrapper.update();
+      await act(() => {
+        wc.click();
+      });
       expect(handled.textContent).to.eql("true");
     });
   });

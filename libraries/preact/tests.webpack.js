@@ -16,11 +16,6 @@
  */
 
 // Run basic and advanced tests through Karma
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-preact-pure';
-
-// Configure Enzyme for the appropriate React adapter
-Enzyme.configure({ adapter: new Adapter() });
 
 require('./src/basic-tests.js');
 require('./src/advanced-tests.js');

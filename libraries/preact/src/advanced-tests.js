@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { mount } from "enzyme"; 
+import { render, act } from "@testing-library/preact";
 import { h } from "preact";
 import { expect } from "chai";
 import {
@@ -34,7 +34,7 @@ describe("advanced support", function() {
   describe("attributes and properties", function() {
     it("will pass array data as a property", function() {
       this.weight = 2;
-      let root = mount(<ComponentWithProperties />).getDOMNode();
+      let root = render(<ComponentWithProperties />).baseElement;
       let wc = root.querySelector("#wc");
       let data = wc.arr;
       expect(data).to.eql(["P", "r", "e", "a", "c", "t"]);
@@ -42,7 +42,7 @@ describe("advanced support", function() {
 
     it("will pass object data as a property", function() {
       this.weight = 2;
-      let root = mount(<ComponentWithProperties />).getDOMNode();
+      let root = render(<ComponentWithProperties />).baseElement;
       let wc = root.querySelector("#wc");
       let data = wc.obj;
       expect(data).to.eql({ org: "developit", repo: "preact" });
@@ -50,7 +50,7 @@ describe("advanced support", function() {
 
     it("will pass object data to a camelCase-named property", function() {
       this.weight = 2;
-      let root = mount(<ComponentWithProperties />).getDOMNode();
+      let root = render(<ComponentWithProperties />).baseElement;
       let wc = root.querySelector("#wc");
       let data = wc.camelCaseObj;
       expect(data).to.eql({ label: "passed" });
@@ -59,64 +59,69 @@ describe("advanced support", function() {
   });
 
   describe("events", function() {
-    it("can declaratively listen to a lowercase DOM event dispatched by a Custom Element", function() {
+    it("can declaratively listen to a lowercase DOM event dispatched by a Custom Element", async function() {
       this.weight = 2;
-      let wrapper = mount(<ComponentWithDeclarativeEvent />);
-      let root = wrapper.getDOMNode();
+      let result = render(<ComponentWithDeclarativeEvent />);
+      let root = result.baseElement;
       let wc = root.querySelector("#wc");
       expect(wc).to.exist;
       let handled = root.querySelector("#lowercase");
       expect(handled.textContent).to.eql("false");
-      wc.click();
-      wrapper.update();
+      await act(() => {
+        wc.click();
+      });
       expect(handled.textContent).to.eql("true");
     });
 
-    it("can declaratively listen to a kebab-case DOM event dispatched by a Custom Element", function() {
+    it("can declaratively listen to a kebab-case DOM event dispatched by a Custom Element", async function() {
       this.weight = 1;
-      let wrapper = mount(<ComponentWithDeclarativeEvent />);
-      let root = wrapper.getDOMNode();
+      let result = render(<ComponentWithDeclarativeEvent />);
+      let root = result.baseElement;
       let wc = root.querySelector("#wc");
       let handled = root.querySelector("#kebab");
       expect(handled.textContent).to.eql("false");
-      wc.click();
-      wrapper.update();
+      await act(() => {
+        wc.click();
+      });
       expect(handled.textContent).to.eql("true");
     });
 
-    it("can declaratively listen to a camelCase DOM event dispatched by a Custom Element", function() {
+    it("can declaratively listen to a camelCase DOM event dispatched by a Custom Element", async function() {
       this.weight = 1;
-      let wrapper = mount(<ComponentWithDeclarativeEvent />);
-      let root = wrapper.getDOMNode();
+      let result = render(<ComponentWithDeclarativeEvent />);
+      let root = result.baseElement;
       let wc = root.querySelector("#wc");
       let handled = root.querySelector("#camel");
       expect(handled.textContent).to.eql("false");
-      wc.click();
-      wrapper.update();
+      await act(() => {
+        wc.click();
+      });
       expect(handled.textContent).to.eql("true");
     });
 
-    it("can declaratively listen to a CAPScase DOM event dispatched by a Custom Element", function() {
+    it("can declaratively listen to a CAPScase DOM event dispatched by a Custom Element", async function() {
       this.weight = 1;
-      let wrapper = mount(<ComponentWithDeclarativeEvent />);
-      let root = wrapper.getDOMNode();
+      let result = render(<ComponentWithDeclarativeEvent />);
+      let root = result.baseElement;
       let wc = root.querySelector("#wc");
       let handled = root.querySelector("#caps");
       expect(handled.textContent).to.eql("false");
-      wc.click();
-      wrapper.update();
+      await act(() => {
+        wc.click();
+      });
       expect(handled.textContent).to.eql("true");
     });
 
-    it("can declaratively listen to a PascalCase DOM event dispatched by a Custom Element", function() {
+    it("can declaratively listen to a PascalCase DOM event dispatched by a Custom Element", async function() {
       this.weight = 1;
-      let wrapper = mount(<ComponentWithDeclarativeEvent />);
-      let root = wrapper.getDOMNode();
+      let result = render(<ComponentWithDeclarativeEvent />);
+      let root = result.baseElement;
       let wc = root.querySelector("#wc");
       let handled = root.querySelector("#pascal");
       expect(handled.textContent).to.eql("false");
-      wc.click();
-      wrapper.update();
+      await act(() => {
+        wc.click();
+      });
       expect(handled.textContent).to.eql("true");
     });
   });

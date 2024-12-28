@@ -4,7 +4,6 @@
   "description": "Compare how different frameworks handle Web Components.",
   "license": "Apache 2.0",
   "scripts": {
-    "install": "node scripts/install.mjs",
     "build": "wireit",
     "copy-and-verify-results": "wireit",
     "update-goldens": "wireit",
@@ -12,6 +11,12 @@
     "start": "wireit",
     "karma-plugins": "wireit"
   },
+  "workspaces": [
+    "libraries/*",
+    "libraries/__shared__/*",
+    "libraries/__shared__/karma-plugins/*",
+    "docs"
+  ],
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "chai": "^4.3.4",
@@ -19,7 +24,6 @@
     "http-server": "14.1.1",
     "minimist": "1.2.8",
     "node-fetch": "^3.0.0",
-    "ora": "7.0.1",
     "wireit": "^0.14.0"
   },
   "wireit": {
