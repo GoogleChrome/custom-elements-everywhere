@@ -72,9 +72,9 @@ const ComponentWithProps = {
       angular.extend(this, {
         bool: true,
         num: 42,
-        str: 'Angular',
-        arr: ['A', 'n', 'g', 'u', 'l', 'a', 'r'],
-        obj: { org: 'angular', repo: 'angular' },
+        str: 'custom',
+        arr: ['c', 'u', 's', 't', 'o', 'm'],
+        obj: { org: 'webcomponents', repo: 'custom-elements-everywhere' },
         camelCaseObj: { label: "passed" }
       });
     }

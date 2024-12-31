@@ -42,7 +42,7 @@
       ],
       "files": [
         "karma.conf.js",
-        "tests.webpack.ts",
+        "tests.webpack.js",
         "tsconfig.json",
         "src",
         "meta"

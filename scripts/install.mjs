@@ -18,6 +18,7 @@ async function install() {
     {name: join('__shared__', 'karma-plugins', 'karma-custom-html-reporter')},
     {name: join('__shared__', 'karma-plugins' , 'karma-custom-json-reporter')},
     {name: join('__shared__', 'karma-plugins', 'karma-mocha')},
+    {name: join('__shared__', 'tests')},
     {name: join('__shared__', 'webcomponents')},
   ];
   const packages = allLibs.map((lib) => join(__dirname, '..', 'libraries', lib.name));
