@@ -29,7 +29,7 @@
     "@angular/forms": "16.2.10",
     "@angular/platform-browser": "16.2.10",
     "@angular/platform-browser-dynamic": "16.2.10",
-    "@angular/router": "16.2.10",
+    "@angular/router": "16.2.12",
     "core-js": "3.33.1",
     "reflect-metadata": "0.1.13",
     "rxjs": "7.8.1",
