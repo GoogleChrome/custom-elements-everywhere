@@ -20,7 +20,7 @@
     "webpack": "5.97.1"
   },
   "dependencies": {
-    "riot": "4.14.0"
+    "riot": "9.4.4"
   },
   "wireit": {
     "test": {
