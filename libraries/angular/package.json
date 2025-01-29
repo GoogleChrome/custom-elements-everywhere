@@ -33,7 +33,7 @@
     "core-js": "3.33.1",
     "reflect-metadata": "0.1.13",
     "rxjs": "7.8.1",
-    "zone.js": "0.13.1"
+    "zone.js": "0.15.0"
   },
   "wireit": {
     "test": {
