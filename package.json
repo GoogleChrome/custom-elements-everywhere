@@ -34,6 +34,7 @@
         "./libraries/angularjs:build",
         "./libraries/dio:build",
         "./libraries/dojo:build",
+        "./libraries/ember:build",
         "./libraries/hybrids:build",
         "./libraries/hyperapp:build",
         "./libraries/hyperhtml:build",

@@ -1,0 +1,19 @@
+{
+  "success": 32,
+  "failed": 0,
+  "skipped": 0,
+  "error": false,
+  "disconnected": false,
+  "exitCode": 0,
+  "score": 100,
+  "basicSupport": {
+    "total": 16,
+    "failed": 0,
+    "passed": 16
+  },
+  "advancedSupport": {
+    "total": 16,
+    "failed": 0,
+    "passed": 16
+  }
+}
