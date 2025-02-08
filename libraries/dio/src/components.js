@@ -89,9 +89,9 @@ export class ComponentWithProperties extends Component {
     const data = {
       bool: true,
       num: 42,
-      str: 'DIO',
-      arr: ['D', 'I', 'O'],
-      obj: { org: 'thysultan', repo: 'dio.js' },
+      str: 'custom',
+      arr: ['c', 'u', 's', 't', 'o', 'm'],
+      obj: { org: 'webcomponents', repo: 'custom-elements-everywhere' },
       camelCaseObj: { label: "passed" }
     };
     return (

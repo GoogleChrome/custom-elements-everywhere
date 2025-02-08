@@ -78,7 +78,7 @@ export class ComponentWithDifferentViews extends Component {
         {showWC ? (
           <ce-with-children ref={(el) => this.wc = el}></ce-with-children>
         ) : (
-          <div ref={this.dummy}>Dummy view</div>
+          <div id="dummy" ref={this.dummy}>Dummy view</div>
         )}
       </div>
     );
@@ -90,9 +90,9 @@ export class ComponentWithProperties extends Component {
     const data = {
       bool: true,
       num: 42,
-      str: 'React',
-      arr: ['R', 'e', 'a', 'c', 't'],
-      obj: { org: 'facebook', repo: 'react' },
+      str: 'custom',
+      arr: ['c', 'u', 's', 't', 'o', 'm'],
+      obj: { org: 'webcomponents', repo: 'custom-elements-everywhere' },
       camelCaseObj: { label: "passed" }
     };
     return (
@@ -153,7 +153,7 @@ export class ComponentWithImperativeEvent extends Component {
     let state = this.state;
     return (
       <div>
-        <div ref={(el) => this.handled = el}>{state.eventHandled.toString()}</div>
+        <div id="handled" ref={(el) => this.handled = el}>{state.eventHandled.toString()}</div>
         <ce-with-event id="wc" ref={(el) => this.wc = el}></ce-with-event>
       </div>
     );
@@ -195,11 +195,11 @@ export class ComponentWithDeclarativeEvent extends Component {
     let state = this.state;
     return (
       <div>
-        <div ref={(el) => this.lowercase = el}>{state.lowercaseHandled.toString()}</div>
-        <div ref={(el) => this.kebab = el}>{state.kebabHandled.toString()}</div>
-        <div ref={(el) => this.camel = el}>{state.camelHandled.toString()}</div>
-        <div ref={(el) => this.caps = el}>{state.capsHandled.toString()}</div>
-        <div ref={(el) => this.pascal = el}>{state.pascalHandled.toString()}</div>
+        <div id="lowercase" ref={(el) => this.lowercase = el}>{state.lowercaseHandled.toString()}</div>
+        <div id="kebab" ref={(el) => this.kebab = el}>{state.kebabHandled.toString()}</div>
+        <div id="camel" ref={(el) => this.camel = el}>{state.camelHandled.toString()}</div>
+        <div id="caps" ref={(el) => this.caps = el}>{state.capsHandled.toString()}</div>
+        <div id="pascal" ref={(el) => this.pascal = el}>{state.pascalHandled.toString()}</div>
         <ce-with-event id="wc" ref={(el) => this.wc = el}
           onlowercaseevent={this.handleLowercaseEvent}
           onkebab-event={this.handleKebabEvent}

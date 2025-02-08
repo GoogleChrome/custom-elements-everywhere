@@ -15,6 +15,66 @@
  * limitations under the License.
  */
 
-// Run basic and advanced tests through Karma
-require('./src/basic-tests.js')
-require('./src/advanced-tests.js')
+import { component } from 'riot'
+import {
+  ComponentWithoutChildren,
+  ComponentWithChildren,
+  ComponentWithChildrenRerender,
+  ComponentWithDifferentViews,
+  ComponentWithProperties,
+  ComponentWithImperativeEvent,
+  ComponentWithDeclarativeEvent
+} from './src/components'
+
+import basicTests from 'basic-tests';
+import advancedTests from 'advanced-tests';
+
+// Setup the test harness. This will get cleaned out with every test.
+let app = document.createElement('div')
+app.id = 'app'
+document.body.appendChild(app)
+let scratch // This will hold the actual element under test.
+
+beforeEach(function() {
+  scratch = document.createElement('div')
+  scratch.id = 'scratch'
+  app.appendChild(scratch)
+})
+
+afterEach(function() {
+  app.innerHTML = ''
+  scratch = null
+})
+
+function render(Component) {
+  const el = component(Component)(scratch)
+  return {wc: scratch.querySelector('#wc'), el}
+}
+
+const renderers = {
+  renderComponentWithoutChildren() {
+    return render(ComponentWithoutChildren)
+  },
+  renderComponentWithChildren() {
+    return render(ComponentWithChildren)
+  },
+  renderComponentWithChildrenRerender() {
+    return render(ComponentWithChildrenRerender)
+  },
+  renderComponentWithDifferentViews() {
+    const {wc, el} = render(ComponentWithDifferentViews)
+    return {wc, el, toggle: () => el.toggle()}
+  },
+  renderComponentWithProperties() {
+    return render(ComponentWithProperties)
+  },
+  renderComponentWithImperativeEvent() {
+    return render(ComponentWithImperativeEvent)
+  },
+  renderComponentWithDeclarativeEvent() {
+    return render(ComponentWithDeclarativeEvent)
+  }
+}
+
+basicTests(renderers);
+advancedTests(renderers);

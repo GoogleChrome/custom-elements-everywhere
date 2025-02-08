@@ -43,10 +43,10 @@ module.exports = function (config) {
       // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
-      'tests.webpack.ts'
+      'tests.webpack.js'
     ],
     preprocessors: {
-      'tests.webpack.ts': ['webpack', 'sourcemap'] // preprocess with webpack and our sourcemap loader
+      'tests.webpack.js': ['webpack', 'sourcemap'] // preprocess with webpack and our sourcemap loader
     },
     mime: {
       'text/x-typescript': ['ts']
@@ -68,6 +68,7 @@ module.exports = function (config) {
         extensions: ['.js', '.ts'],
         modules: [
           path.resolve(__dirname, '../__shared__/webcomponents/src'),
+          path.resolve(__dirname, '../__shared__/tests/src'),
           path.resolve(__dirname, './node_modules')
         ]
       },

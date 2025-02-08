@@ -80,6 +80,10 @@
         "./libraries/__shared__/karma-plugins/karma-custom-html-reporter:build",
         "./libraries/__shared__/karma-plugins/karma-custom-json-reporter:build",
         "./libraries/__shared__/karma-plugins/karma-mocha:build"
+      ],
+      "files": [
+        "./libraries/__shared__/tests/src/basic-tests.js",
+        "./libraries/__shared__/tests/src/advanced-tests.js"
       ]
     }
   }
