@@ -18,7 +18,7 @@
     "webpack": "5.94.0"
   },
   "dependencies": {
-    "@stencil/core": "2.20.0"
+    "@stencil/core": "4.26.0"
   },
   "wireit": {
     "test": {
